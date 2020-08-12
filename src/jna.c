@@ -1,8 +1,6 @@
 #include <ncurses.h>
 #include "../include/move.h"
-
-//void moveChar(...)
-//void destroyChar();
+#include "../include/curve.h"
 
 #define up 1
 #define down -1
@@ -23,10 +21,11 @@ int main()
 	curs_set(0);
 		
 	//starting cursor position
-	*x = LINES-(LINES/3);
-	*y = COLS-(COLS/2);
+	*x = COLS-(COLS/2);
+	*y = LINES-(LINES/3);
 
-	move(*x, *y);
+	move(*y, *x);
+	addch('#');
 	wrefresh(stdscr);
 
 	//game loop	
@@ -45,16 +44,16 @@ int main()
 					return 0;
 					break;
 				case 'w':
-					moveChar(x, y, down, 0);				
+					moveChar(x, y, 0, down);				
 					break;
 				case 'a':	
-					moveChar(x, y, 0, down);
+					moveChar(x, y, down, 0);
 					break;
 				case 's':
-					moveChar(x, y, up, 0);						
+					moveChar(x, y, 0, up);						
 					break;
 				case 'd':
-					moveChar(x, y, 0, up);	
+					moveChar(x, y, up, 0);	
 					break;
 			
 				}
